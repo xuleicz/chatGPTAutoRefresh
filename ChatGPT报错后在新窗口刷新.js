@@ -5,7 +5,6 @@
 // @description  打开新窗口来代替当前窗口刷新，可以不丢失当前输入的消息
 // @author       Lei Xu
 // @match        https://chat.openai.com/chat*
-// @exclude      https://chat.openai.com/chat#
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=openai.com
 // @grant        none
 // ==/UserScript==
@@ -29,7 +28,7 @@
 
         // 创建 iframe 元素
         const iframe = document.createElement("iframe");
-        iframe.src = "https://chat.openai.com/chat#";
+        iframe.src = "https://chat.openai.com/404";
         iframe.style.position = "fixed";
         iframe.style.top = "50%";
         iframe.style.left = "50%";
