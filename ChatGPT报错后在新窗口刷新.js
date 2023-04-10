@@ -5,15 +5,13 @@
 // @description  打开新窗口来代替当前窗口刷新，可以不丢失当前输入的消息
 // @author       Lei Xu
 // @match        https://chat.openai.com/chat*
+// @exclude      https://chat.openai.com/chat#
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=openai.com
 // @grant        none
 // ==/UserScript==
 
 (function() {
     'use strict';
-
-    //URL带#则不运行
-    if (window.location.href.endsWith('#')) return;
 
     console.log("“ChatGPT报错后在新窗口刷新”脚本启动");
 
