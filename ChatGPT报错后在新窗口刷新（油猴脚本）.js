@@ -14,8 +14,8 @@
 
     console.log("“ChatGPT报错后在新窗口刷新”脚本启动");
 
-    //后台刷新
-    function reloadInAnotherWindow(handleClosed) {
+    //弹窗刷新
+    function reloadInAnotherWindow(callbackWhenClosed) {
         // 创建遮罩层
         const overlay = document.createElement("div");
         overlay.style.position = "fixed";
@@ -28,7 +28,6 @@
 
         // 创建 iframe 元素
         const iframe = document.createElement("iframe");
-        iframe.src = "https://chat.openai.com/404";
         iframe.style.position = "fixed";
         iframe.style.top = "50%";
         iframe.style.left = "50%";
@@ -36,7 +35,32 @@
         iframe.style.height = "600px";
         iframe.style.background = "#fff";
         iframe.style.transform = "translate(-50%, -50%)";
+        // 加载404页面
+        iframe.src = "https://chat.openai.com/404";
         overlay.appendChild(iframe);
+
+
+        // 定时检查是否成功访问404页面
+        function check404Shown() {
+            if(iframe.contentDocument != null) {
+                var found_h1 = iframe.contentDocument.documentElement.getElementsByTagName('h1');
+                if (found_h1.length > 0) {
+                    var h1 = found_h1[0];
+
+                    if (h1.innerText == '404') {
+                        // 关闭遮罩层
+                        overlay.remove();
+                        callbackWhenClosed();
+                        return;
+                    }
+                }
+            }
+            //再循环
+            setTimeout(check404Shown, 1000);
+        }
+
+        // 页面加载后定时检查是否成功访问404页面
+        iframe.addEventListener('load', check404Shown);
 
         // 创建关闭按钮
         const closeButton = document.createElement("button");
@@ -63,11 +87,11 @@
         // 关闭按钮的点击事件，关闭遮罩层
         closeButton.addEventListener("click", () => {
             overlay.remove();
-            handleClosed();
+            callbackWhenClosed();
         });
     }
 
-    //关闭窗口后自动点击“重新生成”
+    //点击“重新生成”
     function clickRegenerate() {
 
         //找到第一个main标签
@@ -111,7 +135,7 @@
 
                     console.log('后台刷新');
 
-                    //后台刷新
+                    //弹窗刷新
                     reloadInAnotherWindow(clickRegenerate);
                 }
             }
