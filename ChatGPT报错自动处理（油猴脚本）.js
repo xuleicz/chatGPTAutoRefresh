@@ -1,10 +1,11 @@
 // ==UserScript==
-// @name         ChatGPT报错后在新窗口刷新
+// @name         ChatGPT报错自动处理
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  打开新窗口来代替当前窗口刷新，可以不丢失当前输入的消息
 // @author       Lei Xu
-// @match        https://chat.openai.com/chat*
+// @match        https://chat.openai.com/*
+// @exclude      https://chat.openai.com/404
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=openai.com
 // @grant        none
 // ==/UserScript==
@@ -12,7 +13,7 @@
 (function() {
     'use strict';
 
-    console.log("“ChatGPT报错后在新窗口刷新”脚本启动");
+    console.log("“ChatGPT报错自动处理”脚本启动");
 
     //弹窗刷新
     function reloadInAnotherWindow(callbackWhenClosed) {
