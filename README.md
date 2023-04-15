@@ -7,7 +7,7 @@
 报错后自动处理，让对话继续。
 
 ## 用法
-1. 浏览器安装油猴插件（Tampermonkey），添加新脚本，复制“chatGPT报错自动处理（油猴脚本）.js”中的所有文本，替换新脚本窗口中的现有所有内容，按Ctrl+S保存。
+1. 浏览器安装油猴插件（Tampermonkey），添加新脚本，复制“chatGPTAutoRefresh.user.js”中的所有文本，替换新脚本窗口中的现有所有内容，按Ctrl+S保存。
 2. 刷新chatGPT网页。
 
 ## 原理
