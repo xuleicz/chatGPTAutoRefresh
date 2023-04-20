@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name         ChatGPT会话保持和自动重试
-// @description
+// @name         chatGPTAutoRefresh
+// @description  chatGPT自动刷新和重试
 // @namespace    http://tampermonkey.net/
 // @version      0.2
 // @author       Lei Xu
@@ -25,9 +25,10 @@
 			//会话过期
 			if (response.status == 403) {
 				if (new Date().getTime() < lastRefreshFailedTime.getTime() + 3000) {
-					throw '刷新失败过于频繁';
+                    console.warn('重试刷新过于频繁');
+                    startSchedule();
                 }
-				refreshInIframe();
+                else refreshInIframe();
 			}
 			//会话更新成功
 			else {
